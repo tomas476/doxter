@@ -722,3 +722,11 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
   .topo { padding-right: 10px; }
   .pedir-topo { border-radius: 0 22px 22px 0; padding: 0 26px 0 22px; }
 }
+
+/* ---------- v10: em ecrãs mais largos do que 1857 px (o portátil do Tomás a 100 %) o rosto e o título do hero crescem com a largura, em vez de ficarem do mesmo tamanho em píxeis ---------- */
+@media (min-width: 1858px) {
+  .hero { max-height: 59.23vw; }
+  .rosto { width: 81.69vw; height: 90.08vw; margin-left: -40.85vw; margin-top: -27.6vw; }
+  .hero-folha { top: calc(27.49vw + 34px); }
+  .hero-titulo { font-size: 6.03vw; bottom: 3.88vw; }
+}
