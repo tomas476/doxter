@@ -730,3 +730,8 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
   .hero-folha { top: calc(27.49vw + 34px); }
   .hero-titulo { font-size: 6.03vw; bottom: 3.88vw; }
 }
+
+/* ---------- v11: rosto do hero maior e mais abaixo (pedido do Tomás, 17/11). A partir de 1500 px cresce com a largura (escala 2,4 a 1857 px); abaixo fica como estava, para não tapar o título ---------- */
+@media (min-width: 1500px) {
+  .rosto { width: max(1517px, 95.63vw); height: max(1672.8px, 105.46vw); margin-left: min(-758.5px, -47.82vw); margin-top: -25.85vw; }
+}
