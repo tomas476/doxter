@@ -801,3 +801,27 @@ html.abre, html.abre body { overflow: hidden; overscroll-behavior: none; }
 
 /* v13d: no telemóvel os reels cabem inteiros no ecrã (o vizinho acaba antes da margem) */
 @media (max-width: 899px) { .reels { --rw: min(calc((50vw - 22px) / .96), 210px); } }
+
+/* ---------- v15 movimento mais rápido e limpo (17/11): a abertura passa de ~4,3 s a ~2,5 s, mesma sequência ---------- */
+.abre .l-sobr { animation: bate .26s var(--curva) .05s backwards; }
+.abre .l-esc { animation: nasce .34s var(--curva) .18s backwards; }
+.abre .l-cara, .abre .l-faixa { animation: nasce .3s var(--curva) .3s backwards; }
+.abre .l-olho { animation: olha .18s var(--curva) .48s backwards; }
+.abre .l-l { animation: letra .22s var(--curva) calc(.6s + var(--i) * .025s) backwards; }
+.abre .l-cunha { animation: corta .12s cubic-bezier(.5, 0, 1, .6) .86s backwards; }
+.abre .papel { animation: abre-papel .6s var(--curva) 1s backwards; }
+.abre .logo { animation: voo .6s var(--curva) 1s backwards; }
+.abre .menu-botao, .abre .pedir-topo, .abre .topo .nav { animation: surge .3s linear 1.35s backwards; }
+.abre .pedir-fixo { animation: sobe-barra .45s var(--curva) 1.45s backwards; }
+.abre .r-venda { animation: venda .4s var(--curva) 1.35s backwards; }
+.abre .r-cara { animation: nasce .38s var(--curva) 1.6s backwards; }
+.abre .r-olho, .abre .r-olho-d { animation: olha-g .24s var(--curva) 1.9s backwards; }
+.abre .hero-titulo .linha > span { animation: linha .6s var(--curva) backwards; }
+.abre .hero-titulo .linha:nth-child(1) > span { animation-delay: 1.5s; }
+.abre .hero-titulo .linha:nth-child(2) > span { animation-delay: 1.6s; }
+.abre .hero-titulo .linha:nth-child(3) > span { animation-delay: 1.7s; }
+.abre .hero-folha { animation: pousa .45s var(--curva) 2s backwards; }
+@keyframes linha { from { transform: translateY(112%); } }
+.reels-cartao { transition-duration: .45s; }
+.pedido { transition-duration: .6s; }
+.hero-folha.troca { animation-duration: .45s; }

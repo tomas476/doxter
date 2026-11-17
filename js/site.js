@@ -36,7 +36,7 @@
       window.removeEventListener('wheel', trava); window.removeEventListener('touchmove', trava); d.removeEventListener('keydown', travaTecla);
       if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
     };
-    setTimeout(fim, 4300);
+    setTimeout(fim, 2550);
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') fim(); });
   }
   window.addEventListener('load', function () { raiz.classList.add('suave'); });
