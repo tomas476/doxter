@@ -901,3 +901,6 @@ section[id] { scroll-margin-top: 72px; }
   #como .passo { margin-bottom: 36px; }
   .reels-faixa { padding: 0; }
 }
+
+/* v18c: o plug-in é só o portátil, sem fundo */
+#plugin .ilustra img { clip-path: none; }
