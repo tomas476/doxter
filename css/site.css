@@ -791,3 +791,6 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
 }
 @media (prefers-reduced-motion: reduce) { .reels-cartao { transition: none; } }
 [data-movimento="off"] .reels-cartao { transition: none; }
+
+/* v13b: o carrossel fica no seu próprio contexto de camadas (os cartões usam z-index até 50 e passavam por cima do papel do splash, z-index 40) */
+.reels { isolation: isolate; z-index: 0; }
