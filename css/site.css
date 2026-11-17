@@ -798,3 +798,6 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
 /* v13c: durante a abertura a página não rola e o carrossel fica escondido */
 html.abre, html.abre body { overflow: hidden; overscroll-behavior: none; }
 .abre .reels { visibility: hidden; }
+
+/* v13d: no telemóvel os reels cabem inteiros no ecrã (o vizinho acaba antes da margem) */
+@media (max-width: 899px) { .reels { --rw: min(calc((50vw - 22px) / .96), 210px); } }

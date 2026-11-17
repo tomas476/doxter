@@ -200,7 +200,7 @@
     var largo = mq.matches;
     lis.forEach(function (li, i) {
       var dd = i - cur; if (dd > N / 2) dd -= N; if (dd < -N / 2) dd += N; var a = Math.abs(dd);
-      var x = dd * (largo ? 70 : 62), rot = a === 0 ? 1.5 : (dd < 0 ? -2 : 2.5);
+      var x = dd * (largo ? 70 : 52), rot = a === 0 ? 1.5 : (dd < 0 ? -2 : 2.5);
       li.style.transform = 'translate(' + x + '%,0) scale(' + (a ? 0.84 : 1) + ') rotate(' + rot + 'deg)';
       li.style.zIndex = String(50 - a);
       li.style.opacity = a > 1 ? '0' : (a ? '.72' : '1');
