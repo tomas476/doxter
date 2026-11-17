@@ -1,0 +1,7 @@
+# Só o site gerado vai para o GitHub (repositório público). Notas internas e fontes ficam de fora.
+docs/
+src/
+build.py
+direccao-criativa.json
+.DS_Store
+__pycache__/
