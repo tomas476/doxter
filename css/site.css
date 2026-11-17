@@ -744,3 +744,44 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
 @media (max-width: 899px) and (max-height: 740px) {
   .hero-titulo { padding-top: calc(284px * .86 + 48px); }
 }
+
+/* ---------- v13 reels: carrossel dos 3 reels (molde do site da Pantiera, js/site.js «reels») ----------
+   computador: ao lado do título «Cada documento passa pela guarda.»; telemóvel: secção própria entre o hero e a guarda.
+   O mesmo carrossel muda de casa pelo JS (data-reels-web / data-reels-tel). */
+.reels-faixa { --cor: var(--giz); color: var(--pet); padding: 64px 0 104px; }
+.reels { --rw: min(54vw, 220px); position: relative; display: grid; justify-items: center; gap: 20px; outline: none; }
+.reels:focus-visible { outline: 2px solid var(--marca); outline-offset: 6px; }
+.reels-palco { position: relative; width: 100%; height: calc(var(--rw) * 16 / 9 + 16px); margin: 0; padding: 0; list-style: none; touch-action: pan-y; overscroll-behavior-x: contain; }
+.reels-cartao { position: absolute; left: 50%; top: 8px; width: var(--rw); margin-left: calc(var(--rw) / -2); aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; background: var(--abismo);
+  box-shadow: 0 26px 44px -22px rgba(1, 28, 43, .55), 0 0 0 1px rgba(1, 28, 43, .1); transition: transform .7s var(--curva), opacity .7s var(--curva); will-change: transform; cursor: pointer; }
+.reels-cartao.frente { cursor: default; }
+.reels-cartao video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.reels-som { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .2); background: rgba(1, 28, 43, .62); color: #fff; cursor: pointer; transition: opacity .3s linear; }
+.reels-som svg, .reels-seta svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.reels-som .on { display: none; } .reels-som[aria-pressed="true"] .on { display: inline; } .reels-som[aria-pressed="true"] .off { display: none; }
+.reels-cartao:not(.frente) .reels-som { opacity: 0; pointer-events: none; }
+.reels-painel { display: flex; align-items: center; gap: 4px; padding: 4px 6px; border-radius: 999px; background: #fff; border: 1px solid rgba(1, 28, 43, .12); color: var(--pet); }
+.reels-seta { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: inherit; background: transparent; border: 0; cursor: pointer; transition: background-color .2s linear; }
+.reels-seta:active { transform: scale(.94); }
+.reels-seta:focus-visible, .reels-som:focus-visible { outline: 2px solid var(--marca); outline-offset: 2px; }
+.reels-num { min-width: 4.6em; text-align: center; font-size: 13px; font-weight: 500; letter-spacing: .12em; font-variant-numeric: tabular-nums; color: var(--ardosia); }
+@media (hover: hover) { .reels-seta:hover { background: rgba(1, 28, 43, .07); } }
+/* dentro da guarda (fundo noite): painel escuro */
+.guarda .reels-painel { background: rgba(255, 255, 255, .06); border-color: rgba(157, 184, 199, .26); color: #fff; }
+.guarda .reels-num { color: var(--aco); }
+.guarda .reels-cartao { box-shadow: 0 30px 50px -24px rgba(0, 0, 0, .7), 0 0 0 1px rgba(157, 184, 199, .18); }
+@media (hover: hover) { .guarda .reels-seta:hover { background: rgba(255, 255, 255, .1); } }
+@media (max-width: 899px) { .reels-casa { display: none; } }
+@media (min-width: 900px) {
+  .reels-faixa { display: none; }
+  .sec-cabeca.com-reels { display: grid; grid-template-columns: minmax(0, 1fr) 440px; grid-template-rows: auto 1fr; column-gap: 56px; align-items: start; }
+  .com-reels > h2, .com-reels > .sec-intro { grid-column: 1; }
+  .reels-casa { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .reels-casa .reels { --rw: 168px; }
+}
+@media (min-width: 1280px) {
+  .sec-cabeca.com-reels { grid-template-columns: minmax(0, 1fr) 500px; column-gap: 72px; }
+  .reels-casa .reels { --rw: 186px; }
+}
+@media (prefers-reduced-motion: reduce) { .reels-cartao { transition: none; } }
+[data-movimento="off"] .reels-cartao { transition: none; }

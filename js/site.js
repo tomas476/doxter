@@ -153,3 +153,93 @@
     });
   }
 })();
+
+/* reels (v13): carrossel dos 3 reels, molde do site da Pantiera (js/47-reels.js). O do centro toca mudo quando está à
+   vista; os vizinhos espreitam dos lados, mais pequenos e inclinados. Setas, contador, teclado, dedo, trackpad e som por
+   reel. No telemóvel o carrossel muda-se para a secção própria entre o hero e a guarda. */
+(function () {
+  'use strict';
+  var raiz = document.querySelector('[data-reels]'); if (!raiz) return;
+  var web = document.querySelector('[data-reels-web]'), tel = document.querySelector('[data-reels-tel]');
+  var mq = matchMedia('(min-width: 900px)');
+  var casa = function () { var alvo = mq.matches ? web : tel; if (alvo && raiz.parentNode !== alvo) alvo.appendChild(raiz); };
+  casa(); if (mq.addEventListener) mq.addEventListener('change', function () { casa(); pinta(); });
+  var parado = function () { return document.documentElement.dataset.movimento === 'off' || matchMedia('(prefers-reduced-motion: reduce)').matches; };
+  var palco = raiz.querySelector('[data-reels-palco]'), num = raiz.querySelector('[data-reels-num]');
+  var reais = JSON.parse(document.getElementById('reels-dados').textContent), R = reais.length;
+  var dados = reais.concat(reais), N = dados.length; // em roda: há sempre um cartão de cada lado
+  var svgSom = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="off" d="m16 9.5 5 5m0-5-5 5"/></svg>';
+  var cur = 0, dentro = false, somLigado = false;
+  var lis = dados.map(function (r, i) {
+    var li = document.createElement('li');
+    li.className = 'reels-cartao';
+    li.innerHTML = '<video muted playsinline preload="none" poster="assets/reels/' + r.id + '.webp" data-src="assets/reels/' + r.id + '.mp4" width="540" height="960" aria-label="Reel: ' + r.t + '"></video>' +
+      '<button type="button" class="reels-som" aria-pressed="false" aria-label="Ligar o som">' + svgSom + '</button>';
+    li.addEventListener('click', function (e) { if (cur !== i && !e.target.closest('.reels-som')) { e.preventDefault(); vai(i); } });
+    li.querySelector('video').addEventListener('ended', function () { if (cur === i) vai(i + 1); });
+    palco.appendChild(li);
+    return li;
+  });
+  function botao(li) {
+    var v = li.querySelector('video'), b = li.querySelector('.reels-som'), ouve = !v.muted && !v.paused;
+    b.setAttribute('aria-pressed', String(ouve)); b.setAttribute('aria-label', ouve ? 'Desligar o som' : 'Ligar o som');
+  }
+  function pinta() {
+    var largo = mq.matches;
+    lis.forEach(function (li, i) {
+      var dd = i - cur; if (dd > N / 2) dd -= N; if (dd < -N / 2) dd += N; var a = Math.abs(dd);
+      var x = dd * (largo ? 70 : 62), rot = a === 0 ? 1.5 : (dd < 0 ? -2 : 2.5);
+      li.style.transform = 'translate3d(' + x + '%,0,0) scale(' + (a ? 0.84 : 1) + ') rotate(' + rot + 'deg)';
+      li.style.zIndex = String(50 - a);
+      li.style.opacity = a > 1 ? '0' : (a ? '.72' : '1');
+      li.style.pointerEvents = a > 1 ? 'none' : 'auto';
+      li.classList.toggle('frente', a === 0);
+      li.setAttribute('aria-hidden', a ? 'true' : 'false');
+      li.querySelectorAll('button').forEach(function (el) { el.tabIndex = a ? -1 : 0; });
+      var v = li.querySelector('video');
+      if (a <= 1 && !v.getAttribute('src')) v.src = v.dataset.src;
+      if (a <= 1 && dentro) v.preload = a === 0 ? 'auto' : 'metadata';
+      if (a === 0 && dentro && (!parado() || somLigado)) {
+        v.muted = !somLigado;
+        var p = v.play(); if (p) p.catch(function () { somLigado = false; v.muted = true; v.play().catch(function () {}); });
+      } else { v.pause(); v.muted = true; }
+      botao(li);
+    });
+    num.textContent = ('0' + ((cur % R) + 1)).slice(-2) + ' / ' + ('0' + R).slice(-2);
+  }
+  lis.forEach(function (li) { var v = li.querySelector('video'); ['volumechange', 'play', 'pause'].forEach(function (t) { v.addEventListener(t, function () { botao(li); }); }); });
+  var vai = function (i) { cur = (i + N) % N; pinta(); };
+  raiz.querySelector('[data-reels-ant]').addEventListener('click', function () { vai(cur - 1); });
+  raiz.querySelector('[data-reels-seg]').addEventListener('click', function () { vai(cur + 1); });
+  raiz.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') vai(cur - 1); if (e.key === 'ArrowRight') vai(cur + 1); });
+  // o som liga-se dentro do próprio toque (o iOS só deixa aqui); o botão segue sempre o estado real do vídeo
+  palco.addEventListener('click', function (e) {
+    var b = e.target.closest('.reels-som'); if (!b) return;
+    var v = b.closest('li').querySelector('video');
+    somLigado = v.muted || v.paused;
+    if (!v.getAttribute('src')) v.src = v.dataset.src;
+    v.muted = !somLigado;
+    if (somLigado) v.play().catch(function () { somLigado = false; v.muted = true; });
+    pinta();
+  });
+  // rato a arrastar, dedo para o lado, trackpad na horizontal (um reel por gesto); o scroll vertical fica livre
+  var x0 = null;
+  palco.addEventListener('pointerdown', function (e) { if (e.pointerType === 'mouse') x0 = e.clientX; }, { passive: true });
+  addEventListener('pointerup', function (e) { if (x0 === null) return; var dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) vai(cur + (dx < 0 ? 1 : -1)); }, { passive: true });
+  var trav = false, acum = 0, tAcum = 0;
+  raiz.addEventListener('wheel', function (e) {
+    if (e.ctrlKey) return;
+    var dx = e.deltaX, dy = e.deltaY; if (Math.abs(dx) <= Math.abs(dy) * 1.1) return;
+    e.preventDefault(); acum += dx;
+    if (trav) acum = 0; else if (Math.abs(acum) > 28) { vai(cur + (acum > 0 ? 1 : -1)); acum = 0; trav = true; }
+    clearTimeout(tAcum); tAcum = setTimeout(function () { acum = 0; trav = false; }, 200);
+  }, { passive: false });
+  var t0 = null;
+  raiz.addEventListener('touchstart', function (e) { var t = e.touches[0]; t0 = { x: t.clientX, y: t.clientY }; }, { passive: true });
+  raiz.addEventListener('touchend', function (e) { if (!t0) return; var t = e.changedTouches[0], dx = t.clientX - t0.x, dy = t.clientY - t0.y; t0 = null; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) vai(cur + (dx < 0 ? 1 : -1)); }, { passive: true });
+  // iPhone em poupança de energia: um toque com os reels à vista põe o do centro a andar
+  addEventListener('touchend', function () { if (!dentro || parado()) return; var v = lis[cur].querySelector('video'); if (v.paused) v.play().catch(function () {}); }, { capture: true, passive: true });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { dentro = es[0].isIntersecting; pinta(); }, { threshold: 0.3 }).observe(raiz);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) lis[cur].querySelector('video').pause(); else pinta(); });
+  pinta();
+})();
