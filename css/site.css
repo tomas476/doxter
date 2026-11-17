@@ -739,7 +739,7 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
 /* ---------- v12: no telemóvel o título encosta ao rosto (sem o espaço morto de quase 300 px entre a cara e o título). A cara acaba a 284 px x escala do rosto ---------- */
 @media (max-width: 899px) {
   .hero { height: auto; min-height: 0; max-height: none; }
-  .hero-titulo { position: relative; left: auto; right: auto; bottom: auto; margin: 0 var(--margem); padding: calc(284px * 1.02 + 56px) 0 56px; }
+  .hero-titulo { position: relative; left: auto; right: auto; bottom: auto; margin: 0 var(--margem); padding: calc(284px * 1.02 + 56px) 0 128px; }
 }
 @media (max-width: 899px) and (max-height: 740px) {
   .hero-titulo { padding-top: calc(284px * .86 + 48px); }
