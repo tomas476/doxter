@@ -885,3 +885,19 @@ section[id] { scroll-margin-top: 72px; }
   .duas .ilustra { margin: 0; }
   .caso .duas .ilustra { position: sticky; top: 120px; }
 }
+
+/* ---------- v18b: landing curta no telemóvel (menos espaço, só o essencial) ---------- */
+@media (max-width: 899px) {
+  #beneficios, #solucao, #como, #plugin, #caso, #pedir { padding-top: 48px; padding-bottom: 44px; }
+  .dores dd, #solucao .factos dd { display: none; }
+  .dores, #solucao .factos { gap: 14px; }
+  #caso .caso-linha { display: none; }
+  #beneficios .sec-intro, #como .sec-intro { display: none; }
+  #como .passo { margin-bottom: 20px; }
+}
+@media (min-width: 900px) {
+  #beneficios, #solucao, #como, #plugin, #pedir { padding-top: 96px; padding-bottom: 88px; }
+  #caso { padding-top: 88px; padding-bottom: 96px; }
+  #como .passo { margin-bottom: 36px; }
+  .reels-faixa { padding: 0; }
+}
