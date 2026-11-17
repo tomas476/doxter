@@ -776,12 +776,18 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
   .reels-faixa { display: none; }
   .sec-cabeca.com-reels { display: grid; grid-template-columns: minmax(0, 1fr) 440px; grid-template-rows: auto 1fr; column-gap: 56px; align-items: start; }
   .com-reels > h2, .com-reels > .sec-intro { grid-column: 1; }
+  .com-reels > h2 { font-size: min(84px, 5.5vw); }
   .reels-casa { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
-  .reels-casa .reels { --rw: 168px; }
+  .sec-cabeca.com-reels { grid-template-columns: minmax(0, 1fr) 460px; }
+  .reels-casa .reels { --rw: 192px; }
+}
+@media (min-width: 1100px) {
+  .sec-cabeca.com-reels { grid-template-columns: minmax(0, 1fr) 560px; column-gap: 64px; }
+  .reels-casa .reels { --rw: 228px; }
 }
 @media (min-width: 1280px) {
-  .sec-cabeca.com-reels { grid-template-columns: minmax(0, 1fr) 500px; column-gap: 72px; }
-  .reels-casa .reels { --rw: 186px; }
+  .sec-cabeca.com-reels { grid-template-columns: minmax(0, 1fr) 640px; column-gap: 72px; }
+  .reels-casa .reels { --rw: 262px; }
 }
 @media (prefers-reduced-motion: reduce) { .reels-cartao { transition: none; } }
 [data-movimento="off"] .reels-cartao { transition: none; }
