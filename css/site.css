@@ -713,14 +713,9 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
 .bloco .tempo h2 a { display: inline-flex; align-items: center; min-height: 44px; }
 .tempo li { gap: 0; } .tempo time { margin-bottom: 2px; }
 
-/* ---------- v9: a barra é um D comprido (lado esquerdo reto, lado direito redondo, como o D do logótipo) ---------- */
-.papel { clip-path: inset(var(--tt) var(--tl) calc(100% - var(--tt) - var(--th)) var(--tl) round 0 calc(var(--th) / 2) calc(var(--th) / 2) 0); }
-@keyframes abre-papel { from { clip-path: inset(0 0 0 0 round 0); } }
-.menu-aberto .papel { clip-path: inset(var(--tt) var(--tl) calc(100% - var(--tt) - var(--th)) var(--tl) round 0 calc(var(--th) / 2) 0 0); }
-.menu-botao { padding-right: 22px; }
+/* ---------- v18: a barra é reta nas duas pontas (pedido do Tomás, 17/11) ---------- */
 @media (min-width: 900px) {
   .topo { padding-right: 10px; }
-  .pedir-topo { border-radius: 0 22px 22px 0; padding: 0 26px 0 22px; }
 }
 
 /* ---------- v10: em ecrãs mais largos do que 1857 px (o portátil do Tomás a 100 %) o rosto e o título do hero crescem com a largura, em vez de ficarem do mesmo tamanho em píxeis ---------- */
