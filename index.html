@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Gothic:wdth,wght@75..125,400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=b1b3b183">
+<link rel="stylesheet" href="css/site.css?v=851f6945">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://doxter.pt/#org", "name": "DOXTER", "legalName": "Doxcloud, Lda.", "url": "https://doxter.pt/", "email": "info@doxter.pt", "taxID": "518408221", "address": {"@type": "PostalAddress", "streetAddress": "Rua da Criatividade, Edifícios Centrais, Parque Tecnológico de Óbidos", "postalCode": "2510-216", "addressLocality": "Óbidos", "addressCountry": "PT"}, "sameAs": ["https://www.linkedin.com/company/doxter-gestao-documental"]}, {"@type": "SoftwareApplication", "name": "DOXTER", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://doxter.pt/", "publisher": {"@id": "https://doxter.pt/#org"}, "description": "Software de gestão documental financeira ligado à Autoridade Tributária, com plug-in para ERP Primavera e Cegid."}]}</script>
 </head>
 <body>
@@ -80,14 +80,14 @@
   <a class="ligacao" href="#pedir" data-cta="beneficios">Agendar demonstração</a>
 </section>
 
-<section class="at" id="solucao">
+<section class="at com-ilustra" id="solucao">
   <div class="at-texto">
     <h2>Assim surge o DOXTER.</h2>
     <p class="sec-intro">Um software prático e eficiente, pensado para as dificuldades do processo financeiro.</p>
     <dl class="factos"><div><dt>Ligado à Autoridade Tributária</dt><dd>Mesmo sem software de gestão, gere faturas e outros documentos financeiramente relevantes.</dd></div><div><dt>Tudo arrumado</dt><dd>Organiza os documentos de forma automática. Qualquer um encontra&#8209;se em segundos.</dd></div><div><dt>Pagamentos e compras</dt><dd>Valida pagamentos e regista compras com o documento associado, através do software de gestão.</dd></div><div><dt>Menos erro humano</dt><dd>O mesmo fornecedor é sempre registado da mesma forma.</dd></div></dl>
     <a class="ligacao" href="integracoes/autoridade-tributaria/">Saber mais sobre a ligação à AT</a>
   </div>
-  <div class="at-guarda" aria-hidden="true"><svg class="escudo" viewBox="20 110 700 600" aria-hidden="true" focusable="false"><path class="e-esc" d="M102.5 138H637.5V416.5A267.5 267.5 0 0 1 102.5 416.5Z"/><path class="e-cara" d="M247 320H493V376A123 123 0 0 1 247 376Z"/><path class="e-cara" d="M102.5 296.3L247 336.6L247 345.0L102.5 304.7Z"/><g transform="translate(740 0) scale(-1 1)"><path class="e-cara" d="M102.5 296.3L247 336.6L247 345.0L102.5 304.7Z"/></g><clipPath id="ao"><path d="M247 350.2L340 376.1L340 430L247 430Z"/></clipPath><g clip-path="url(#ao)"><circle class="e-olho" cx="297" cy="375" r="33.5"/></g><g transform="translate(740 0) scale(-1 1)"><g clip-path="url(#ao)"><circle class="e-olho" cx="297" cy="375" r="33.5"/></g></g><path class="e-olho" d="M42 287.6L334 369.1L334 379.9L42 298.4Z"/><g transform="translate(740 0) scale(-1 1)"><path class="e-olho" d="M42 287.6L334 369.1L334 379.9L42 298.4Z"/></g></svg></div>
+  <figure class="ilustra"><img src="assets/ilustracoes/1-ligacao-at.webp" alt="O arquivo da empresa ao lado do que a AT conhece: o que confere, o que fica pendente e o que está fora do e-Fatura (exemplo)" width="1200" height="900" loading="lazy"></figure>
 </section>
 
 <section class="guarda como" id="como">
@@ -122,16 +122,13 @@
 </section>
 
 <section class="erp" id="plugin">
-  <div class="sec-cabeca">
-    <h2>Plug&#8209;in com o ERP Primavera e Cegid.</h2>
-    <p class="sec-intro">Num único ecrã cruzam&#8209;se três fontes: o DOXTER, a Autoridade Tributária e o software de gestão. Os possíveis match e os pendentes ficam numa só janela.</p>
-  </div>
-  <div class="erp-janela">
-    <ol class="erp-abas" aria-label="Separadores do ERP"><li>Geral</li><li>Vendas</li><li>Compras</li><li>Bancos</li><li>Tesouraria</li><li aria-current="true">DOXTER</li></ol>
-    <div class="erp-quadro">
-      <ul class="erp-itens" data-patrulha><li><button type="button" aria-pressed="true" data-d="Todos os documentos numa janela, com as possíveis correspondências e os pendentes. Pode criar Pastas Personalizadas, por exemplo para agrupar as compras por Centro de Custo."><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h7l2 3h9v10H3z"/></svg><span>Explorador</span></button></li><li><button type="button" aria-pressed="false" data-d="Os documentos que entraram e ainda esperam tratamento."><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 13h5l1.5 3h5L16 13h5M3 13l3-8h12l3 8v6H3z"/></svg><span>Pendentes Inbox</span></button></li><li><button type="button" aria-pressed="false" data-d="Os documentos que ainda não têm lançamento correspondente."><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h7v10H4zM14 7h6M14 12h6M14 17h6"/></svg><span>Pendentes Match</span></button></li><li><button type="button" aria-pressed="false" data-d="Os documentos que ficaram bloqueados e pedem a sua atenção."><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 11h14v9H5zM8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Documentos Bloqueados</span></button></li><li><button type="button" aria-pressed="false" data-d="O que a Autoridade Tributária tem e pode corresponder aos seus documentos."><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h10v10H3zM11 9h10v10H11z"/></svg><span>Possíveis Matches AT</span></button></li><li><button type="button" aria-pressed="false" data-d="Associe documentos do DOXTER a registos já existentes de Compras, Contabilidade, Contas Correntes ou Bancos, sem abrir cada editor."><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 8H4v8h6M14 8h6v8h-6M8 12h8"/></svg><span>Associar Documentos</span></button></li><li><button type="button" aria-pressed="false" data-d="Atualiza os dados da Autoridade Tributária a pedido."><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 5v5h-5M4 19v-5h5M19 10a7.5 7.5 0 0 0-13.5-2.5M5 14a7.5 7.5 0 0 0 13.5 2.5"/></svg><span>Sincronizar com a AT</span></button></li></ul>
-      <div class="erp-ficha" aria-live="polite"><b data-erp-nome>Explorador</b><p data-erp-desc>Todos os documentos numa janela, com as possíveis correspondências e os pendentes. Pode criar Pastas Personalizadas, por exemplo para agrupar as compras por Centro de Custo.</p></div>
+  <div class="duas">
+    <div>
+      <h2>Plug&#8209;in com o ERP Primavera e Cegid.</h2>
+      <p class="sec-intro">Num único ecrã cruzam&#8209;se três fontes: o DOXTER, a Autoridade Tributária e o software de gestão. Os possíveis match e os pendentes ficam numa só janela.</p>
+      <a class="ligacao" href="integracoes/primavera-cegid/">Saber mais sobre o plug&#8209;in</a>
     </div>
+    <figure class="ilustra"><img src="assets/ilustracoes/4-plugin-erp.webp" alt="O separador DOXTER dentro do ERP, com o DOXTER, a AT e o ERP no mesmo ecrã e a fatura ao lado (exemplo)" width="1200" height="900" loading="lazy"></figure>
   </div>
 </section>
 
@@ -139,7 +136,6 @@
   <div class="lancar-texto">
     <h2>Nada fica por lançar.</h2>
     <dl class="factos"><div><dt>Lançamento de compras</dt><dd>O mesmo fornecedor é lançado sempre da mesma forma, o que limita os erros humanos.</dd></div><div><dt>Seguinte, seguinte</dt><dd>Os documentos aparecem um a seguir ao outro, para nenhum ficar esquecido.</dd></div></dl>
-    <a class="ligacao" href="integracoes/primavera-cegid/">Saber mais sobre o plug&#8209;in</a>
   </div>
   <div class="baralho" data-baralho>
     <div class="baralho-pilha" aria-hidden="true">
@@ -156,6 +152,8 @@
 </section>
 
 <section class="bloco caso" id="caso">
+  <div class="duas duas-topo">
+  <div>
   <div class="sec-cabeca">
     <h2>Caso de estudo: a Gabriela.</h2>
     <p class="sec-intro">Responsável financeira.</p>
@@ -168,6 +166,9 @@
     <li><b>Hoje</b> lidera uma equipa jovem e digital, e ainda tem tempo para orientar os colegas.</li>
   </ol>
   <blockquote class="caso-frase"><p>«Comecei mergulhada em papel… e agora visualizo tudo no meu portátil.»</p></blockquote>
+  </div>
+  <figure class="ilustra"><img src="assets/ilustracoes/5-antes-depois.webp" alt="Antes, dossiers e papel; agora, as pastas arrumadas no portátil" width="1200" height="900" loading="lazy"></figure>
+  </div>
 </section>
 
 <section class="bloco bloco-papel porque" id="porque">
@@ -260,6 +261,6 @@
 
 <a class="pedir-fixo" href="#pedir" data-cta="barra">Agendar demonstração</a>
 
-<script src="js/site.js?v=b1b3b183" defer></script>
+<script src="js/site.js?v=851f6945" defer></script>
 </body>
 </html>

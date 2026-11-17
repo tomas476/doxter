@@ -874,3 +874,19 @@ section[id] { scroll-margin-top: 72px; }
 .compara td.nao { color: var(--aco); }
 @media (max-width: 599px) { .compara { font-size: 14px; } .compara th, .compara td { padding: 12px 6px; } .compara thead th { font-size: 11px; letter-spacing: .04em; } }
 @media (min-width: 900px) { .caso-linha li { font-size: 19px; } }
+
+/* ---------- v17 ilustrações (refeitas do doxter.pt, aprovadas 17/11) ---------- */
+.ilustra { margin: 32px 0 0; }
+.ilustra img { display: block; width: 100%; height: auto; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 28px, 100% 100%, 0 100%); }
+.ilustra-sub { max-width: 640px; margin-top: 28px; }
+.at.com-ilustra .ilustra { margin-top: 8px; }
+.duas { display: grid; gap: 8px; }
+#plugin .duas .ligacao { margin-top: 20px; }
+@media (min-width: 900px) {
+  .at.com-ilustra { grid-template-columns: minmax(0, 1fr) minmax(0, 560px); column-gap: 72px; align-items: center; }
+  .at.com-ilustra .ilustra { margin: 0; }
+  .duas { grid-template-columns: minmax(0, 1fr) minmax(0, 600px); column-gap: 72px; align-items: center; }
+  .duas-topo { align-items: start; }
+  .duas .ilustra { margin: 0; }
+  .caso .duas .ilustra { position: sticky; top: 120px; }
+}
