@@ -23,7 +23,19 @@
 
   /* a abertura acaba e não volta a mexer */
   if (raiz.classList.contains('abre')) {
-    var fim = function () { raiz.classList.remove('abre'); };
+    /* durante a abertura a página fica no topo e não rola: só se vê a abertura até ao fim */
+    window.scrollTo(0, 0);
+    var trava = function (e) { if (raiz.classList.contains('abre')) e.preventDefault(); };
+    var teclasRolar = { ArrowDown: 1, ArrowUp: 1, PageDown: 1, PageUp: 1, Home: 1, End: 1, ' ': 1 };
+    var travaTecla = function (e) { if (teclasRolar[e.key]) trava(e); };
+    window.addEventListener('wheel', trava, { passive: false });
+    window.addEventListener('touchmove', trava, { passive: false });
+    d.addEventListener('keydown', travaTecla);
+    var fim = function () {
+      raiz.classList.remove('abre');
+      window.removeEventListener('wheel', trava); window.removeEventListener('touchmove', trava); d.removeEventListener('keydown', travaTecla);
+      if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+    };
     setTimeout(fim, 4300);
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') fim(); });
   }

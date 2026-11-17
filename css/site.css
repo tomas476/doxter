@@ -794,3 +794,7 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
 
 /* v13b: o carrossel fica no seu próprio contexto de camadas (os cartões usam z-index até 50 e passavam por cima do papel do splash, z-index 40) */
 .reels { isolation: isolate; z-index: 0; }
+
+/* v13c: durante a abertura a página não rola e o carrossel fica escondido */
+html.abre, html.abre body { overflow: hidden; overscroll-behavior: none; }
+.abre .reels { visibility: hidden; }
