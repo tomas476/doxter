@@ -1026,3 +1026,15 @@ html { scroll-padding-top: 76px; }
   .topo .nav > a:hover, .topo .nav > a[aria-current], .topo .nav > a[href^="https://doxter.app"] { color: #fff; }
   .topo .nav a::after { background: var(--marca); }
 }
+
+/* ---------- v25: imagem pequena à esquerda, título e texto à direita (pedido do Tomás, 18/11) ---------- */
+.lado-a-lado .ilustra-sub { margin: 0 0 28px; max-width: 420px; }
+.lado-texto h2 { margin-top: 0; }
+.lado-texto .resposta { margin-top: 16px; }
+.lado-texto .seguir { margin-top: 24px; }
+@media (min-width: 900px) {
+  .bloco .largura.lado-a-lado { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); column-gap: 80px; align-items: center; }
+  .lado-a-lado .ilustra-sub { margin: 0; max-width: none; }
+  .lado-texto h2 { font-size: clamp(36px, 3.4vw, 52px); max-width: 14ch; }
+  .lado-texto .resposta { max-width: 46ch; }
+}
