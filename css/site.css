@@ -711,7 +711,7 @@ main > section.bloco.bloco-noite { --cor: var(--noite); color: #fff; }
 @media (min-width: 900px) { .bloco.nota .livro { margin-top: 36px; } .bloco.nota .livro-duas:has(> :nth-child(2):last-child), .bloco.nota .livro-duas:has(> :nth-child(1):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .rodape-links a { min-width: 44px; }
 .bloco .tempo h2 a { display: inline-flex; align-items: center; min-height: 44px; }
-.tempo li { gap: 0; } .tempo time { margin-bottom: 2px; }
+.tempo li { row-gap: 0; } .tempo time { margin-bottom: 2px; }
 
 /* ---------- v18: a barra é reta nas duas pontas (pedido do Tomás, 17/11) ---------- */
 @media (min-width: 900px) {
@@ -883,7 +883,6 @@ section[id] { scroll-margin-top: 72px; }
   .duas { grid-template-columns: minmax(0, 1fr) minmax(0, 600px); column-gap: 72px; align-items: center; }
   .duas-topo { align-items: start; }
   .duas .ilustra { margin: 0; }
-  .caso .duas .ilustra { position: sticky; top: 120px; }
 }
 
 /* ---------- v18b: landing curta no telemóvel (menos espaço, só o essencial) ---------- */
@@ -904,3 +903,47 @@ section[id] { scroll-margin-top: 72px; }
 
 /* v18c: o plug-in é só o portátil, sem fundo */
 #plugin .ilustra img { clip-path: none; }
+
+/* v10: marcadores da linha do tempo. Canto cortado como os cartões, um traço a ligar ao título, e nunca por cima do texto */
+.tempo li:not(.tempo-ano)::before { top: 4px; background: var(--pet); border: 0; clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%); transition: background-color .2s linear, transform .3s var(--curva); }
+.tempo li:not(.tempo-ano)::after { content: ""; position: absolute; left: -12px; top: 10px; width: 7px; height: 2px; background: var(--aco); transform-origin: 0 50%; transition: transform .3s var(--curva), background-color .2s linear; }
+@media (hover: hover) {
+  .tempo li:not(.tempo-ano):hover::before { background: var(--azul); transform: scale(1.25); }
+  .tempo li:not(.tempo-ano):hover::after { background: var(--azul); transform: scaleX(1.5); }
+}
+@media (min-width: 900px) {
+  .bloco .tempo h2 a { display: inline; min-height: 0; }
+  .tempo li:not(.tempo-ano)::before { top: 9px; }
+  .tempo time { grid-area: 1 / 1 / span 2 / 2; } .tempo h2 { grid-area: 1 / 2; } .bloco .tempo p { grid-area: 1 / 3 / span 2 / 4; }
+  .tempo li:not(.tempo-ano)::after { left: 195px; top: 15px; width: 16px; }
+}
+[data-movimento="off"] .tempo li::before, [data-movimento="off"] .tempo li::after { transition: none; }
+
+/* v19 (pedido do Tomás, 18/11): as ilustrações não acompanham o scroll; a do plug-in e a da AT sobem um pouco */
+#plugin .duas .ilustra, .at.com-ilustra .ilustra { margin-top: 12px; }
+@media (min-width: 900px) { #plugin .duas .ilustra, .at.com-ilustra .ilustra { margin-top: 0; position: relative; top: -40px; } }
+
+/* ---------- v20: barra colada ao topo, de ponta a ponta (pedido do Tomás, 18/11) ---------- */
+:root { --tl: 0px; --tt: 0px; --th: 56px; --pl: var(--margem); }
+html { scroll-padding-top: 76px; }
+.topo { border-bottom: 1px solid var(--nevoa); padding-right: 4px; }
+.rolou:not(.menu-aberto):not(.abre) .papel { background: rgba(255, 255, 255, .9); }
+@media (max-width: 899px) { .nav, .menu-aberto .nav { right: 10px; } }
+@media (min-width: 900px) {
+  :root { --tl: 0px; --tt: 0px; --th: 68px; --pl: var(--margem); }
+  html { scroll-padding-top: 92px; }
+  .topo { padding-right: 0; }
+  .topo .nav { gap: 30px; padding: 0 32px 0 0; }
+  .topo .nav > a { white-space: nowrap; font-size: 16px; font-weight: 500; }
+  .topo .nav a::after { bottom: -1px; height: 3px; }
+  .pedir-topo { height: calc(100% + 1px); align-self: flex-start; padding: 0 30px; font-size: 16px; white-space: nowrap; }
+  .pedir-topo::after { content: ""; width: 8px; height: 8px; margin-left: 12px; border-top: 2px solid; border-right: 2px solid; transform: rotate(45deg); transition: transform .2s var(--curva); }
+}
+@media (min-width: 900px) and (hover: hover) { .pedir-topo:hover::after { transform: translateX(4px) rotate(45deg); } }
+@media (min-width: 900px) and (max-width: 1179px) {
+  :root { --lh: 34px; --lw: 171.2px; --pl: 28px; }
+  .topo .nav { gap: 18px; padding-right: 20px; }
+  .topo .nav > a { font-size: 15px; }
+  .topo .nav > a[href^="https://doxter.app"] { display: none; }
+  .pedir-topo { padding: 0 18px; font-size: 15px; }
+}
