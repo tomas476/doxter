@@ -78,23 +78,33 @@
 
   }
 
-  /* vídeo do hero: toca mudo e em ciclo só enquanto está à vista; com som só a pedido */
+  /* vídeo do hero: começa com som; se o browser não deixar, toca mudo e o som liga ao primeiro gesto */
   var hv = $('[data-hero-video]');
   if (hv) {
-    var filme = $('video', hv), botaoSom = $('[data-hv-som]', hv), comSom = false;
-    if (parado()) { filme.controls = true; filme.preload = 'none'; filme.src = filme.dataset.mudo; }
-    else {
-      filme.src = filme.dataset.mudo;
+    var filme = $('video', hv), botaoSom = $('[data-hv-som]', hv), mexeu = false, pausadoPorMim = false;
+    var tocar = function () { var t = filme.play(); return t && t.then ? t : Promise.resolve(); };
+    var ligarSom = function () { filme.muted = false; filme.volume = 1; tocar().catch(function () {}); };
+    var aoGesto = function (e) {
+      if (mexeu || !filme.muted) return largar();
+      if (e.target && e.target.closest && e.target.closest('video')) return;
+      ligarSom(); largar();
+    };
+    var largar = function () { ['pointerdown', 'keydown', 'touchend'].forEach(function (n) { d.removeEventListener(n, aoGesto, true); }); };
+    filme.addEventListener('volumechange', function () { botaoSom.hidden = !filme.muted; });
+    ['pointerdown', 'keydown'].forEach(function (n) { filme.addEventListener(n, function () { mexeu = true; }); });
+    botaoSom.addEventListener('click', function (e) { e.stopPropagation(); mexeu = true; ligarSom(); largar(); });
+    if (!parado()) {
+      filme.muted = false;
+      tocar().catch(function () {
+        filme.muted = true; botaoSom.hidden = false; tocar().catch(function () {});
+        ['pointerdown', 'keydown', 'touchend'].forEach(function (n) { d.addEventListener(n, aoGesto, true); });
+      });
       new IntersectionObserver(function (e) {
-        if (comSom) return;
-        if (e[0].isIntersecting) { var t = filme.play(); if (t && t.catch) t.catch(function () {}); } else filme.pause();
+        if (d.fullscreenElement) return;
+        if (!e[0].isIntersecting) { if (!filme.paused) { filme.pause(); pausadoPorMim = true; } }
+        else if (pausadoPorMim) { pausadoPorMim = false; tocar().catch(function () {}); }
       }, { threshold: 0 }).observe(filme);
     }
-    botaoSom.addEventListener('click', function () {
-      comSom = true; filme.loop = false; filme.controls = true; filme.src = filme.dataset.som; filme.muted = false;
-      var t = filme.play(); if (t && t.catch) t.catch(function () {});
-      botaoSom.hidden = true; window.dataLayer.push({ event: 'video_hero_som' });
-    });
   }
 
   /* cenas puxadas pelo scroll, nos dois sentidos */
