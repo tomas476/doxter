@@ -970,3 +970,37 @@ html { scroll-padding-top: 76px; }
   .topo .nav { gap: 24px; padding-right: calc(var(--pl) + var(--lw)); }
   .topo .nav > a { font-size: 14px; }
 }
+
+/* ---------- v22: hero com o vídeo do back-office numa pasta de arquivo; os olhos passam para o logótipo da barra (pedido do Tomás, 18/11) ---------- */
+.topo .l-olho { transform: translate(var(--ox, 0px), var(--oy, 0px)); }
+.topo .l-olho-d { transform: translate(calc(var(--ox, 0px) * -1), var(--oy, 0px)); }
+
+.hero { display: grid; align-content: start; gap: 36px; height: auto; min-height: 0; max-height: none; padding: calc(var(--th) + 30px) var(--margem) 104px; }
+.hero-titulo { position: static; margin: 0; padding: 0; max-width: none; }
+.hero-video { position: relative; margin: 0; padding-top: 30px; }
+.hv-aba { position: absolute; left: 0; top: 0; height: 31px; display: flex; align-items: center; padding: 0 30px 0 14px; background: #fff; color: var(--pet);
+  font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 100%, 0 100%); }
+.hv-pasta { position: relative; padding: 7px; background: #fff; }
+.hv-pasta::before { content: ""; position: absolute; z-index: -1; inset: 12px -10px -10px 12px; background: var(--noite); }
+.hv-pasta::after { content: ""; position: absolute; right: 0; top: 0; width: 34px; height: 34px; background: var(--marca); clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.hero-video { z-index: 0; }
+.hv-filme { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--noite); clip-path: polygon(0 0, calc(100% - 27px) 0, 100% 27px, 100% 100%, 0 100%); }
+.hv-pasta { clip-path: none; }
+.hv-pe { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 20px; margin-top: 22px; font-size: 14px; color: var(--aco); }
+.hv-som { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0; background: none; border: 0; color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+.hv-som::before { content: ""; width: 0; height: 0; border-left: 10px solid var(--marca); border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+.hv-som[hidden] { display: none; }
+.abre .hero-video { animation: hv-entra .7s var(--curva) 1.25s backwards; }
+@keyframes hv-entra { from { opacity: 0; transform: translateY(26px); } }
+@media (hover: hover) { .hv-som:hover { color: var(--marca); } }
+@media (min-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 6fr) minmax(0, 7fr); column-gap: 64px; align-items: center; align-content: center; min-height: min(100svh, 840px); max-height: none; padding: calc(var(--th) + 56px) var(--margem) 72px; }
+  .hero-titulo { order: -1; position: static; bottom: auto; right: auto; max-width: none; font-size: clamp(40px, 3.9vw, 68px); }
+  .hero-video { padding-top: 36px; }
+  .hv-aba { height: 37px; font-size: 13px; padding: 0 36px 0 18px; }
+  .hv-pasta { padding: 9px; }
+  .hv-pasta::before { inset: 18px -16px -16px 18px; }
+  .hv-pasta::after { width: 44px; height: 44px; }
+  .hv-filme { clip-path: polygon(0 0, calc(100% - 35px) 0, 100% 35px, 100% 100%, 0 100%); }
+  .hv-pe { font-size: 15px; margin-top: 30px; }
+}

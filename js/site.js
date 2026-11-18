@@ -59,9 +59,9 @@
   }
 
   /* o olhar: os olhos seguem o rato ou o dedo e voltam ao documento */
-  var rosto = $('.rosto');
+  var rosto = $('.topo .logo');
   if (rosto) {
-    var alvo = { x: 0, y: 7 }, at = { x: 0, y: 7 }, volta, vivo = false;
+    var alvo = { x: 0, y: 0 }, at = { x: 0, y: 0 }, volta, vivo = false;
     var passo = function () {
       at.x += (alvo.x - at.x) * 0.08; at.y += (alvo.y - at.y) * 0.08;
       rosto.style.setProperty('--ox', at.x.toFixed(2) + 'px'); rosto.style.setProperty('--oy', at.y.toFixed(2) + 'px');
@@ -69,14 +69,32 @@
     };
     var olhar = function (x, y) { alvo.x = x; alvo.y = y; if (!vivo && !parado()) { vivo = true; requestAnimationFrame(passo); } };
     window.addEventListener('pointermove', function (e) {
-      if (window.scrollY > window.innerHeight) return;
-      var r = rosto.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height * 0.46;
+      var r = rosto.getBoundingClientRect(), cx = r.left + r.width / 2, cx = r.left + r.height * 0.6, cy = r.top + r.height * 0.5;
       var dx = Math.max(-1, Math.min(1, (e.clientX - cx) / (window.innerWidth / 2)));
       var dy = Math.max(-1, Math.min(1, (e.clientY - cy) / (window.innerHeight / 2)));
-      olhar(dx * 9, 3 + dy * 7);
-      clearTimeout(volta); volta = setTimeout(function () { olhar(0, 7); }, 2500);
+      olhar(dx * 13, dy * 10);
+      clearTimeout(volta); volta = setTimeout(function () { olhar(0, 0); }, 2500);
     }, { passive: true });
 
+  }
+
+  /* vídeo do hero: toca mudo e em ciclo só enquanto está à vista; com som só a pedido */
+  var hv = $('[data-hero-video]');
+  if (hv) {
+    var filme = $('video', hv), botaoSom = $('[data-hv-som]', hv), comSom = false;
+    if (parado()) { filme.controls = true; filme.preload = 'none'; filme.src = filme.dataset.mudo; }
+    else {
+      filme.src = filme.dataset.mudo;
+      new IntersectionObserver(function (e) {
+        if (comSom) return;
+        if (e[0].isIntersecting) { var t = filme.play(); if (t && t.catch) t.catch(function () {}); } else filme.pause();
+      }, { threshold: 0 }).observe(filme);
+    }
+    botaoSom.addEventListener('click', function () {
+      comSom = true; filme.loop = false; filme.controls = true; filme.src = filme.dataset.som; filme.muted = false;
+      var t = filme.play(); if (t && t.catch) t.catch(function () {});
+      botaoSom.hidden = true; window.dataLayer.push({ event: 'video_hero_som' });
+    });
   }
 
   /* cenas puxadas pelo scroll, nos dois sentidos */
