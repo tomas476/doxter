@@ -1013,3 +1013,16 @@ html { scroll-padding-top: 76px; }
   .hero { grid-template-columns: minmax(0, 6fr) minmax(0, 7fr); column-gap: 56px; }
   .hero-titulo { font-size: clamp(48px, 5.4vw, 96px); line-height: 1; }
 }
+
+/* ---------- v24: barra na cor do hero, com desfoque ao descer (pedido do Tomás, 18/11) ---------- */
+.papel { background: var(--pet); }
+.rolou:not(.menu-aberto):not(.abre) .papel { background: rgba(1, 69, 105, .74); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); }
+.topo { color: #fff; border-bottom-color: rgba(157, 184, 199, .2); }
+.topo .l-esc, .topo .l-olho, .topo .l-sobr path, .topo .l-l { fill: #fff; }
+.topo .l-cara, .topo .l-faixa { fill: var(--pet); }
+.topo .l-cunha { fill: var(--marca); }
+@media (min-width: 900px) {
+  .topo .nav > a { color: var(--nevoa); }
+  .topo .nav > a:hover, .topo .nav > a[aria-current], .topo .nav > a[href^="https://doxter.app"] { color: #fff; }
+  .topo .nav a::after { background: var(--marca); }
+}
